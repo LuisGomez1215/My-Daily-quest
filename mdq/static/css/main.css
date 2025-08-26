@@ -1,0 +1,385 @@
+#nav .navbar-brand {
+    margin-right: 0;
+    margin-top: 0.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0
+}
+#nav > div > div:first-child,
+#nav > div > div:last-child {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+i.bi {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    vertical-align: top;
+    position: relative;
+    top: -2px
+}
+i.bi.bi-shadow > svg {
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, .7))
+}
+i.bi-20,
+i.bi-20 > svg {
+    width: 20px;
+    height: 20px
+}
+i.bi-30,
+i.bi-30 > svg {
+    width: 30px;
+    height: 30px
+}
+i.bi-40,
+i.bi-40 > svg {
+    width: 40px;
+    height: 40px
+}
+.btn svg.bi {
+    position: relative;
+    top: -2px;
+    padding-right: 2px
+}
+
+input[type=number].no-arrows::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number].no-arrows {
+    -moz-appearance: textfield;
+}
+
+@media (prefers-color-scheme: dark) {
+    #nav .navbar-brand svg {
+        fill: #fff;
+    }
+}
+.navbar {
+    min-height: 50px !important;
+    height: 50px !important;
+    max-height: 50px !important;
+}
+.petscreen {
+    padding-top: 20%;
+}
+.icon {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.navtext{
+    color:aliceblue;
+    font-family: "Gamergirl";
+}
+@font-face {
+    font-family: "Gamergirl";
+    src: url("../fonts/Gamergirl.ttf");
+}
+.custom-card {
+    position: relative;
+    margin: 20px;
+}
+
+.circle-wrapper {
+    flex-shrink: 0;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background-color: #7a3a73;
+    border: 3px solid white;
+    margin-right: -50px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.circle-img {
+    position: relative;
+    bottom: 7%;
+    width: 100px;
+    height: 100px;
+    border-radius: 30%;
+    object-fit: cover;
+}
+
+.text-box {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px 20px 20px 70px;
+    min-height: 120px;
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.text-box .title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.text-box .divider {
+    margin: 0.5rem 0;
+}
+
+.text-box .subtitle {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.gamertext {
+    font-family: "Gamergirl";
+}
+
+.smallertext{
+    font-size: 12px;
+    color:grey;
+}
+
+.biggertext{
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.divider{
+    color:black;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+.pet-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+}
+
+.spot-offset {
+    position: relative;
+    top: 50px;
+    width: 100%;
+    height: auto;
+}
+
+.pet {
+    width: 60%;
+    height: auto;
+    max-width: 120px;
+}
+
+.settings-container {
+    max-width: 100%;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #a185589d;
+    color: #000000;
+    border: 4px solid #555;
+    border-radius: 8px;
+    flex-grow: 1
+}
+
+.settings-title {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.setting-item {
+    margin: 1rem 0;
+}
+
+.btn-pixel {
+    background-color: #7c4040;
+    color: #fff;
+    border: 2px solid #c46161;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-pixel:hover {
+    background-color: #777;
+    border-color: #fff;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.slider-container input[type=range] {
+    width: 70%;
+}
+
+.palette-option {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border: 2px solid #888;
+    cursor: pointer;
+}
+
+.pet-stats {
+    font-family: 'Gamergirl';
+    color: #000000;
+    background-color: #d3a760;
+}
+
+.progress {
+    border-radius: 0;
+    height: 8px;
+    background-color: #f5deb3;
+}
+
+.progress-bar {
+    border-radius: 0;
+}
+
+.inventory-slot {
+    aspect-ratio: 1 / 1;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+}
+
+.task-screen {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.divider {
+    border: none;
+    border-top: 2px solid #aaa;
+    margin: 0.5rem 0 1rem;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.task-item {
+    background: #fff;
+    color: #000;
+    border-radius: 1.2rem;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 2px 2px 0 #000;
+}
+
+.task-icon {
+    background: #eee;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.btn-add-goal {
+    width: 100%;
+    background: #722;
+    color: #fff;
+    border: none;
+    border-radius: 1.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem;
+    box-shadow: 2px 2px 0 #000;
+}
+
+.btn-add-goal:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.travel-screen {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.travel-title {
+    background: #2e2d2d;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.map-container {
+    background: #be86609c;
+    width: 200px;
+    height: 200px;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+}
+
+.map-image {
+    width: 100%;
+    border-radius: 0.3rem;
+}
+
+.travel-info {
+    background: #eee;
+    color: #222;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.highlight {
+    color: #b22222;
+    font-weight: bold;
+}
+
+.drop-info {
+    background: #bbb;
+    color: #000;
+    border-radius: 0.5rem;
+}
+
+.drop-list {
+    list-style: none;
+    padding-left: 0.5rem;
+    margin: 0;
+}
+
+.drop-list li {
+    margin: 0.2rem 0;
+}
+
+.chance {
+    color: #2e8b57;
+    font-weight: bold;
+}
+
+.btn-travel {
+    width: 100%;
+    background: #722;
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem;
+    box-shadow: 2px 2px 0 #000;
+}
+
+.btn-travel:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}

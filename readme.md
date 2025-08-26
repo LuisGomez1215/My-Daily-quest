@@ -1,0 +1,7 @@
+- Necesitas tener instalado una versión actual de Python 3 (>=3.11) y el módulo `virtualenv` (`pip install --user virtualenv`).
+- Debes inicializar un *virtualenv* en la raíz del proyecto en la carpeta `.venv` (`python -m venv .venv`).
+- Instala las dependencias con el archivo `requirements.txt` (`python -m pip install -r requirements.txt`)
+- Configura las variables de entorno necesarias en el archivo `.env` (debes crearlo).
+- Recordar crear env file! Basarse en .env-example
+- Recordar utilizar Pylint extension para mantener codigo en orden. (Ademas, tienen que instalar y configurar )
+- Puedes inicializar el .venv con `.venv/Scripts/activate.ps1`

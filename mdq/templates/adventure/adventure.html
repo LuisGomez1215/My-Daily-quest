@@ -1,0 +1,34 @@
+{% extends "layouts/master.html" %}
+{% block content %}
+{% load static %}
+
+<body class="gamertext d-flex justify-content-center align-items-center vh-100" style="background-image: url('{% static "backgrounds/background.png" %}')">
+    <div class="container travel-screen text-light py-3 col-10 col-md-6 col-lg-4 d-flex flex-column align-items-center">
+        <h2 class="text-center travel-title">Where will you travel?</h2>
+        <div class="map-container my-2 justify-content-center border rounded">
+            <img src="{% static 'backgrounds/map.png' %}" alt="Travel Map" class="map-image">
+        </div>
+        <div class="travel-info p-2 mt-2">
+            <p class="mb-1">The location you selected will grant
+                <span class="highlight">10 EXP</span> and
+                <span class="highlight">2652 credits</span>,
+                travel will take
+                <span class="highlight">7 hours</span>.
+            </p>
+        </div>
+        <div class="drop-info p-2 mt-2">
+            <p class="mb-1 small">
+                There's a <span class="chance">5,28%</span> chance to obtain the following item types:
+            </p>
+            <ul class="drop-list small">
+                <li>🧴 Cosmetics</li>
+                <li>🍖 Food</li>
+            </ul>
+        </div>
+        <p class="text-center mt-3 small" style="color:black;">Will you travel to the <b>Nunsk Village</b>?</p>
+        <div class="mt-2 text-center">
+            <button class="btn-travel">LET'S GO!</button>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layouts/master.html" %}
+{% block content %}
+{% load static %}
+<body class="gamertext" style="background-image: url('{% static "backgrounds/background.png" %}')">
+    <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+        <div class="d-flex align-items-center justify-content-start custom-card">
+            <div class="circle-wrapper d-flex align-items-center justify-content-center">
+                <img src="{{ pet.pet_avatar.url }}" alt="{{ pet.species }}" class="circle-img">
+            </div>
+            <div class="text-box flex-grow-1">
+                <a class="w-100 h-100 biggertext" href="{% url 'petselectform' pet.id %}">
+                    <div class="biggertext">
+                        {{ pet.species }}
+                    </div>
+                </a>
+                <hr class="divider">
+                <div class="smallertext">{{ pet.desc }}</div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-start custom-card">
+            <div class="circle-wrapper d-flex align-items-center justify-content-center">
+                <img src="{{ pet2.pet_avatar.url }}" alt="{{ pet2.species }}" class="circle-img">
+            </div>
+            <div class="text-box flex-grow-1">
+                <a class="w-100 h-100 biggertext" href="{% url 'petselectform' pet2.id %}">
+                    <div class="biggertext">
+                        {{ pet2.species }}
+                    </div>
+                </a>                <hr class="divider">
+                <div class="smallertext">{{ pet2.desc }}</div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-start custom-card">
+            <div class="circle-wrapper d-flex align-items-center justify-content-center">
+                <img src="{{ pet3.pet_avatar.url }}" alt="{{ pet3.species }}" class="circle-img">
+            </div>
+            <div class="text-box flex-grow-1">
+                <a class="w-100 h-100 biggertext" href="{% url 'petselectform' pet3.id %}">
+                    <div class="biggertext">
+                        {{ pet3.species }}
+                    </div>
+                </a>                <hr class="divider">
+                <div class="smallertext">{{ pet3.desc }}</div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

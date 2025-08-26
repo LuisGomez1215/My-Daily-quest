@@ -1,0 +1,40 @@
+{% extends "layouts/master.html" %}
+{% block content %}
+{% load static %}
+
+<body class="gamertext" style="background-image: url('{% static "backgrounds/background.png" %}')">
+    <div class="container">
+        <div class="d-flex justify-content-center align-items-center petscreen position-relative">
+            <img class="h100 w100 img-fluid" src="{% static "backgrounds/boxpet.png" %}">
+            <div class="pet-overlay position-absolute top-50 bottom-50 start-50 translate-middle">
+                <div class="pet-wrapper position-relative d-inline-block">
+                    <img class="img-fluid spot-offset" src="{% static 'icons/PETSPOT.png' %}">
+                    <img class="pet img-fluid position-absolute top-50 start-50 translate-middle"
+                    src="{{ pet.species.pet_avatar.url }}"
+                    alt="{{ pet.name }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <input type="text" class="form-control me-2" placeholder="Search items..." style="max-width: 70%;">
+            <select class="form-select" style="max-width: 25%;">
+                <option>All</option>
+                <option>Cosmetics</option>
+                <option>Consumables</option>
+                <option>Backgrounds</option>
+            </select>
+        </div>
+        <div class="row g-3">
+            {% for i in "123456789012"|make_list %}
+            <div class="col-3">
+                <div class="inventory-slot d-flex justify-content-center align-items-center">
+                    <img src="{% static 'icons/example_item.png' %}" alt="item" class="img-fluid">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "layouts/master.html" %}
+{% block content %}
+{% load static %}
+
+<body class="gamertext d-flex justify-content-center align-items-center vh-100" style="background-image: url('{% static "backgrounds/background.png" %}')">
+    <div class="settings-container col-10 col-md-6 col-lg-4 d-flex flex-column container">
+        <div class="settings-title">Settings</div>
+        <div class="setting-item">
+            <label for="volume">Volume</label>
+            <div class="slider-container">
+                <span>🔈</span>
+                <input type="range" id="volume" min="0" max="100" value="50">
+                <span>🔊</span>
+            </div>
+        </div>
+        <div class="setting-item">
+            <label>Palette</label>
+            <div>
+                <div class="palette-option" style="background-color: #753737ff;"></div>
+                <div class="palette-option" style="background-color: #4b644bff;"></div>
+                <div class="palette-option" style="background-color: #5c5c97ff;"></div>
+                <div class="palette-option" style="background-color: #7c7c49ff;"></div>
+            </div>
+        </div>
+        <div class="setting-item">
+            <button class="btn-pixel">Export Data</button>
+        </div>
+        <div class="setting-item">
+            <form action="{% url "logout" %}" method="post" name="logout">
+                {% csrf_token %}
+                <a type="submit" href="#" class="btn-pixel" onclick="document.logout.submit()">Logout</a>
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}

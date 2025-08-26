@@ -1,0 +1,32 @@
+{% extends "layouts/master.html" %}
+{% block content %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+<body class="gamertext d-flex justify-content-center align-items-center min-vh-100" style="background-image: url('{% static "backgrounds/background.png" %}')">
+    <div class="container mt-3 py-3 col-10 d-flex flex-colum justify-content-center">
+        {% if form.errors.non_field_errors %}
+        {{ form.errors.non_field_errors }}
+        {% endif %}
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-8 col-md-8 col-lg-5">
+                <form method="post" action="" class="form card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Registration</h5>
+                        <div class="mb-3">
+                            {% bootstrap_form form exclude='turnstile' %}
+                            <div class="d-flex justify-content-center">
+                                <div class="d-inline">{{ form.turnstile }}</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary w-100 mb-2" type="submit">Enviar</button>
+                        </div>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
