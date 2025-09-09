@@ -37,7 +37,7 @@
                                 alt="{{ clo_item.cosmetic.name }}"
                                 class="inventory-image">
                         </div>
-                        <p class="small mb-0" style="color:black;">{{ clo_item.cosmetic.name }}</p>
+                        <p class="small mb-0 text-wrap" style="color:black; overflow-wrap: break-word;">{{ clo_item.cosmetic.name }}</p>
                         {% if clo_item.equipped %}
                         <span class="badge bg-success mt-1 small">{{ clo_item.cosmetic.slot }}</span>
                         {% endif %}
@@ -48,11 +48,11 @@
             {% for inventory in items %}
                 {% for inv_item in inventory.inventoryitem_set.all %}
                 <div class="col-3">
-                    <div class="inventory-slot d-flex justify-content-center align-items-center">
+                    <div class="inventory-slot d-flex justify-content-center align-items-center text-wrap">
                         <img src="{{ inv_item.consumable.icon.url }}" alt="{{ inv_item.consumable.name }}" class="inventory-image">
                     </div>
                     <div class="small">
-                        <p style="color:black;">{{ inv_item.consumable.name  }}</p>
+                        <p class="text-wrap" style="color:black; overflow-wrap: break-word;">{{ inv_item.consumable.name  }}</p>
                         <p style="color:black;">x{{ inv_item.quantity }}</p>
                     </div>
                 </div>

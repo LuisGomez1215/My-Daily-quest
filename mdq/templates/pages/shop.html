@@ -30,7 +30,7 @@
                         {% else %}
                             <a href="{% url 'purchase-item' item.id %}"
                             class="purchase-link" data-name="{{ item.item_object.name }}" data-price="{{ item.price }}">
-                                <p style="color:black;">{{ item.item_object.name }}</p>
+                                <p class="text-wrap" style="color:black; overflow-wrap: break-word;">{{ item.item_object.name }}</p>
                             </a>
                             <p style="color:black;" class="fw-light fst-italic">${{ item.price }}</p>
                         {% endif %}

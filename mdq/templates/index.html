@@ -22,19 +22,23 @@
             </div>
         </div>
         {% if petcheck %}
-            <div class="pet-stats text-center mt-3 border rounded">
-                <p class="mb-1">Lv {{ pet.level }}</p>
-                <div class="progress">
-                    <div class="progress-bar bg-primary" role="progressbar"
-                    style="width: {{ pet.exp|divisibleby:pet.max_exp|floatformat:0 }}%;"
-                    aria-valuenow="{{ pet.exp }}" aria-valuemin="0" aria-valuemax="{{ pet.max_exp }}">
+        <div class="pet-stats text-center mt-3 border rounded">
+            <p class="mb-1">Lv {{ pet.level }}</p>
+            <div class="progress">
+                <div id="exp-bar" class="progress-bar bg-primary"
+                role="progressbar"
+                aria-valuenow="{{ current_exp }}"
+                aria-valuemin="0"
+                aria-valuemax="{{ next_level_exp }}">
                 </div>
             </div>
-            <small>{{ pet.exp }} / {{ pet.max_exp }}</small>
+            <p class="small mt-1">
+                {{ current_exp|floatformat:0 }} / {{ next_level_exp|floatformat:0 }} EXP
+            </p>
             <p class="mt-2 mb-1">HP</p>
             <p class="mb-1">{{ pet.hp }}/{{ pet.hp }}</p>
             <p class="mt-2 mb-1">Stamina</p>
-            <p class="mb-1">{{ pet.stamina }}/{{ pet.stamina }}</p>
+            <p class="mb-1">{{  pet.stamina }}/{{ pet.stamina }}</p>
             <p class="mt-2 mb-0">Mood: <strong>{{ pet.mood_status }}</strong></p>
             <p class="mt-2 mb-1">Bond</p>
             {% for i in "12345" %}
@@ -44,7 +48,25 @@
             <span style="color: #ddd;">●</span>
             {% endif %}
             {% endfor %}
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const bar = document.getElementById("exp-bar");
+        const targetPercent = {{ percentage|floatformat:0 }};
+        let currentPercent = 0;
+
+        const interval = setInterval(() => {
+            if (currentPercent >= targetPercent) {
+                clearInterval(interval);
+            } else {
+                currentPercent++;
+                bar.style.width = currentPercent + "%";
+                bar.setAttribute("aria-valuenow", currentPercent);
+            }
+        }, 10);
+    });
+</script>
 {% endblock %}
