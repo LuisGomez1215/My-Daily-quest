@@ -21,34 +21,29 @@
                 {% endif %}
             </div>
         </div>
-        {% if not petcheck %}
-        {% else %}
-        <div class="pet-stats text-center mt-3 border rounded">
-            <p class="mb-1">Lv {{ pet.level }}</p>
-            <div class="progress">
-                <div class="progress-bar bg-primary" role="progressbar"
-                style="width: {{ pet.exp|divisibleby:pet.max_exp|floatformat:0 }}%;"
-                aria-valuenow="{{ pet.exp }}" aria-valuemin="0" aria-valuemax="{{ pet.max_exp }}">
+        {% if petcheck %}
+            <div class="pet-stats text-center mt-3 border rounded">
+                <p class="mb-1">Lv {{ pet.level }}</p>
+                <div class="progress">
+                    <div class="progress-bar bg-primary" role="progressbar"
+                    style="width: {{ pet.exp|divisibleby:pet.max_exp|floatformat:0 }}%;"
+                    aria-valuenow="{{ pet.exp }}" aria-valuemin="0" aria-valuemax="{{ pet.max_exp }}">
+                </div>
             </div>
-        </div>
-        <small>{{ pet.exp }} / {{ pet.max_exp }}</small>
-        <p class="mt-2 mb-1">HP</p>
-        <div class="progress">
-            <div class="progress-bar bg-primary" style="width: {{ pet.hp }}%;"></div>
-        </div>
-        <p class="mt-2 mb-1">Stamina</p>
-        <div class="progress">
-            <div class="progress-bar bg-primary" style="width: {{ pet.stamina }}%;"></div>
-        </div>
-        <p class="mt-2 mb-0">Mood: <strong>{{ pet.mood_status }}</strong></p>
-        <p class="mt-2 mb-1">Bond</p>
-        {% for i in "12345" %}
-        {% if forloop.counter <= pet.bond_meter %}
-        <span style="color: red;">●</span>
-        {% else %}
-        <span style="color: #ddd;">●</span>
-        {% endif %}
-        {% endfor %}
+            <small>{{ pet.exp }} / {{ pet.max_exp }}</small>
+            <p class="mt-2 mb-1">HP</p>
+            <p class="mb-1">{{ pet.hp }}/{{ pet.hp }}</p>
+            <p class="mt-2 mb-1">Stamina</p>
+            <p class="mb-1">{{ pet.stamina }}/{{ pet.stamina }}</p>
+            <p class="mt-2 mb-0">Mood: <strong>{{ pet.mood_status }}</strong></p>
+            <p class="mt-2 mb-1">Bond</p>
+            {% for i in "12345" %}
+            {% if forloop.counter <= pet.bond_meter %}
+            <span style="color: red;">●</span>
+            {% else %}
+            <span style="color: #ddd;">●</span>
+            {% endif %}
+            {% endfor %}
         {% endif %}
     </div>
 </body>

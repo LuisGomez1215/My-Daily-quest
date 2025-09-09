@@ -1,0 +1,36 @@
+{% extends "layouts/master.html" %}
+{% block content %}
+{% load static %}
+
+<body class="gamertext d-flex justify-content-center align-items-center vh-100"
+      style="background-image: url('{% static "backgrounds/background.png" %}')">
+    <div class="container task-screen text-light py-3 col-10 col-md-6 col-lg-4 d-flex flex-column">
+        <hr class="divider">
+        <div class="d-flex justify-content-between align-items-center mb-3 px-2 ">
+            <span class="small" style="color:black;">🛒 Select goals to add!</span>
+        </div>
+        <div class="task-list">
+            {% for task in existing_tasks %}
+                <div class="task-item d-flex align-items-center mb-2">
+                    {% if task.icon %}
+                        <span class="task-icon">{{ task.icon }}</span>
+                    {% else %}
+                        <span class="task-icon me-2">🎯</span>
+                    {% endif %}
+                    <span class="task-text flex-grow-1">{{ task.name }}</span>
+                    <form method="post" class="ms-auto">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <button type="submit" class="btn btn-sm btn-success">Add</button>
+                    </form>
+                </div>
+            {% empty %}
+                <div class="text-center small text-muted fst-italic"><p style="color:black;">All default goals already added ✅</p></div>
+            {% endfor %}
+        </div>
+        <div class="add-goal-btn mt-4 text-center">
+            <a href="{% url 'create-task' %}" class="btn-add-goal">＋ CREATE GOAL!</a>
+        </div>
+    </div>
+</body>
+{% endblock %}

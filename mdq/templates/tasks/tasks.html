@@ -3,36 +3,43 @@
 {% load static %}
 
 <body class="gamertext d-flex justify-content-center align-items-center vh-100" style="background-image: url('{% static "backgrounds/background.png" %}')">
-    <div class="container task-screen text-light py-3 col-10 col-md-6 col-lg-4 d-flex flex-column">
+    <div class="container task-screen text-light py-3 col-10 col-md-6 col-lg-4 d-flex flex-column overflow-auto">
         <hr class="divider">
         <div class="d-flex justify-content-between align-items-center mb-3 px-2 ">
-            <span class="small" style="color:black;">📅 5 goals left for today!</span>
+            <span class="small" style="color:black;">📅 {{ tasks|length }} goals left for today!</span>
         </div>
-        <div class="task-list">
-            <div class="task-item d-flex align-items-center">
-                <span class="task-icon">🛏️</span>
-                <span class="task-text">GET OUT OF BED</span>
-            </div>
-            <div class="task-item d-flex align-items-center">
-                <span class="task-icon">👕</span>
-                <span class="task-text">LAUNDRY</span>
-            </div>
-            <div class="task-item d-flex align-items-center">
-                <span class="task-icon">🦷</span>
-                <span class="task-text">BRUSH TEETH</span>
-            </div>
-            <div class="task-item d-flex align-items-center">
-                <span class="task-icon">🛁</span>
-                <span class="task-text">TAKE A SHOWER</span>
-            </div>
-            <div class="task-item d-flex align-items-center">
-                <span class="task-icon">🍴</span>
-                <span class="task-text">DISHES</span>
-            </div>
+        <div class="task-list flex-grow-1 overflow-auto px-1" style="max-height: 50vh;">
+        {% for task in tasks %}
+            <form method="post" action="{% url 'task-complete' task.id %}" class="task-form mb-2">
+                {% csrf_token %}
+                <div class="task-item d-flex align-items-center p-2 border rounded"
+                    role="button">
+                    {% if task.icon %}
+                        <span class="task-icon me-2">{{ task.icon }}</span>
+                    {% else %}
+                        <span class="task-icon me-2">🎯</span>
+                    {% endif %}
+                    <span class="task-text flex-grow-1">{{ task.name }}</span>
+                    {% if task.custom %}
+                        <span class="badge bg-warning text-dark ms-2">Custom</span>
+                    {% endif %}
+                </div>
+            </form>
+        {% empty %}
+            <div class="text-center small" style="color:black;">You don't have any tasks!</div>
+        {% endfor %}
         </div>
         <div class="add-goal-btn mt-4 text-center">
-            <button class="btn-add-goal">＋ ADD A GOAL!</button>
+            <a href="{% url 'task_select' %}" class="btn-add-goal">＋ ADD A GOAL!</a>
         </div>
     </div>
 </body>
+<script>
+document.querySelectorAll(".task-form .task-item").forEach(item => {
+    item.addEventListener("click", () => {
+        item.closest("form").submit();
+    });
+});
+</script>
+
 {% endblock %}

@@ -19,7 +19,7 @@
             {% if request.user.is_authenticated %}
             <div class="justify-content-end d-flex align-items-stretch">
                 <img class=" img-fluid align-self-start" src="{% static "icons/COIN.png" %}" alt="">
-                <p class="icon align-self fs-5 text-sm-end navtext">{{ user.profile.credits }}</p>
+                <p class="icon align-self fs-5 text-sm-end navtext">{{ user.wallet.credits }}</p>
             </div>
             {% endif %}
         </nav>
@@ -33,13 +33,14 @@
                 <img class="icon" src="{% static "icons/HOME.png" %}" alt="">
             </a>
             {% if request.user.is_authenticated %}
+            {% if request.user.pet %}
             <a href="{% url 'index' %}">
                 <img class="icon" src="{% static "icons/PET.png" %}" alt="">
             </a>
             <a href="{% url 'customize' %}">
                 <img class="icon" src="{% static "icons/BOX.png" %}" alt="">
             </a>
-            <a href="{% url 'tasks' %}">
+            <a href="{% url 'tasklist' %}">
                 <img class="icon" src="{% static "icons/TASKS.png" %}" alt="">
             </a>
             <a href="{% url 'adventure' %}">
@@ -48,6 +49,7 @@
             <a href="{% url 'shop' %}">
                 <img class="icon" src="{% static "icons/SHOP.png" %}" alt="">
             </a>
+            {% endif %}
             {% endif %}
         </nav>
     </div>

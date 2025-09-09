@@ -10,17 +10,28 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
     pet = None
+    current_exp = 0
+    next_level_exp = 0
+    percentage = 0
     petcheck = Pet.objects.filter(user=request.user)
 
     if petcheck:
         try:
             pet = Pet.objects.get(user=request.user)
+            current_exp = pet.exp
+            next_level_exp = pet.max_exp
+            percentage = min(100, (current_exp / next_level_exp) * 100)
         except Pet.DoesNotExist:
             response = render(request, '404.html')
             response.status_code = 404
             return response
 
-    return render(request,  'index.html', {'petcheck': petcheck, 'pet': pet})
+    return render(request,  'index.html', {
+        'petcheck': petcheck,
+        'pet': pet,
+        'current_exp': current_exp,
+        'next_level_exp': next_level_exp,
+        'percentage': percentage,})
 
 
 def register(request):

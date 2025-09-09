@@ -18,14 +18,42 @@
             </select>
         </div>
         <div class="row g-3">
-            {% for i in "123456789012"|make_list %}
-            <div class="col-3">
-                <div class="inventory-slot d-flex justify-content-center align-items-center">
-                    <img src="{% static 'icons/example_item.png' %}" alt="item" class="img-fluid">
+            {% for item in items %}
+                <div class="col-3">
+                    <div class="inventory-slot d-flex justify-content-center align-items-center">
+                        <img src="{{ item.item_object.icon.url }}" alt="item" class="inventory-image">
+                    </div>
+                    <div class="small text-center">
+                        {% if item.content_type.model == "cosmetic" and item.item_object.id in owned %}
+                            <p style="color:gray;">{{ item.item_object.name }}</p>
+                            <span class="badge bg-success">✔ Owned</span>
+                        {% else %}
+                            <a href="{% url 'purchase-item' item.id %}"
+                            class="purchase-link" data-name="{{ item.item_object.name }}" data-price="{{ item.price }}">
+                                <p style="color:black;">{{ item.item_object.name }}</p>
+                            </a>
+                            <p style="color:black;" class="fw-light fst-italic">${{ item.price }}</p>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
 </body>
+<script>
+    document.querySelectorAll(".purchase-link").forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            const itemName = this.dataset.name;
+            const itemPrice = this.dataset.price;
+            const url = this.href;
+
+            if (confirm(`Do you want to buy "${itemName}" for $${itemPrice} credits?`)) {
+                window.location.href = url;
+            }
+        });
+    });
+</script>
+
 {% endblock %}

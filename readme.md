@@ -5,3 +5,9 @@
 - Recordar crear env file! Basarse en .env-example
 - Recordar utilizar Pylint extension para mantener codigo en orden. (Ademas, tienen que instalar y configurar )
 - Puedes inicializar el .venv con `.venv/Scripts/activate.ps1`
+
+///
+todo
+detailed stat screen? - optional - for now
+ultra optional - export data, tasks completed
+optional - clean images of background

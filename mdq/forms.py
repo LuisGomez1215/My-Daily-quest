@@ -1,12 +1,23 @@
 from django import forms
-from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.db import transaction
 from django.contrib.auth import forms as user_forms, password_validation
-from django.utils.safestring import mark_safe
 from turnstile.fields import TurnstileField
 
-from mdq.models import MdqUser, Pet, PetBackground, Profile
+from mdq.models import AdventureLocation, Inventory, MdqUser, Pet, Profile, Closet, TasksList, Wallet, Task
+
+
+class TaskCreateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ["name", "icon"]
+
+
+class AdventureStartForm(forms.Form):
+    destination = forms.ModelChoiceField(
+        queryset=AdventureLocation.objects.all(),
+        empty_label="Select an adventure",
+        widget=forms.Select(attrs={"class": "form-select"})
+    )
 
 
 class PetSelectForm(forms.ModelForm):
@@ -87,4 +98,8 @@ class MdqUserRegistrationForm(forms.Form):
         data = self.cleaned_data
         new_user = MdqUser.objects.create_user(username=data['username'], email=data['email'], password=data['password1'])
         Profile.objects.create(user=new_user)
+        Inventory.objects.create(user=new_user)
+        Closet.objects.create(user=new_user)
+        Wallet.objects.create(user=new_user)
+        TasksList.objects.create(user=new_user)
         return new_user

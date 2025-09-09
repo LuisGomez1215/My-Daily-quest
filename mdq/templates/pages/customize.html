@@ -26,15 +26,46 @@
                 <option>Backgrounds</option>
             </select>
         </div>
-        <div class="row g-3">
-            {% for i in "123456789012"|make_list %}
-            <div class="col-3">
-                <div class="inventory-slot d-flex justify-content-center align-items-center">
-                    <img src="{% static 'icons/example_item.png' %}" alt="item" class="img-fluid">
+        <div class="row g-3 text-center">
+        {% for closet in cosmetics %}
+                {% for clo_item in closet.closetitem_set.all %}
+                <div class="col-3">
+                    <form method="post" action="{% url 'customize-equip' clo_item.id %}" class="equip-form">
+                        {% csrf_token %}
+                        <div class="inventory-slot d-flex flex-column justify-content-center align-items-center clickable-slot">
+                            <img src="{{ clo_item.cosmetic.icon.url }}"
+                                alt="{{ clo_item.cosmetic.name }}"
+                                class="inventory-image">
+                        </div>
+                        <p class="small mb-0" style="color:black;">{{ clo_item.cosmetic.name }}</p>
+                        {% if clo_item.equipped %}
+                        <span class="badge bg-success mt-1 small">{{ clo_item.cosmetic.slot }}</span>
+                        {% endif %}
+                    </form>
                 </div>
-            </div>
+                {% endfor %}
+            {% endfor %}
+            {% for inventory in items %}
+                {% for inv_item in inventory.inventoryitem_set.all %}
+                <div class="col-3">
+                    <div class="inventory-slot d-flex justify-content-center align-items-center">
+                        <img src="{{ inv_item.consumable.icon.url }}" alt="{{ inv_item.consumable.name }}" class="inventory-image">
+                    </div>
+                    <div class="small">
+                        <p style="color:black;">{{ inv_item.consumable.name  }}</p>
+                        <p style="color:black;">x{{ inv_item.quantity }}</p>
+                    </div>
+                </div>
+                {% endfor %}
             {% endfor %}
         </div>
     </div>
 </body>
+<script>
+    document.querySelectorAll(".clickable-slot").forEach(slot => {
+        slot.addEventListener("click", function() {
+            this.closest(".equip-form").submit();
+        });
+    });
+</script>
 {% endblock %}

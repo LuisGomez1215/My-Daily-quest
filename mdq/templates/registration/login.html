@@ -4,6 +4,20 @@
 
 <body class="gamertext d-flex justify-content-center align-items-center vh-100" style="background-image: url('{% static "backgrounds/background.png" %}')">
     <div class="container mt-3 py-3 col-10 d-flex flex-column">
+        {% if form.errors or next %}
+        <div class="alert alert-danger text-center" role="alert" data-bs-dismiss="alert">
+            <strong>Error:</strong>
+            {% if form.errors %}
+            El nombre de usuario y/o contraseña no son correctos.
+            {% elif user.is_authenticated %}
+            No tienes permiso para acceder a esta página. Para continuar, por favor ingresa con una cuenta
+            que sí tenga acceso.
+            {% else %}
+            Por favor inicia sesión para ver esta página.
+            {% endif %}
+        </div>
+        {% endif %}
+
         <div class="row justify-content-center">
             <div class="col-sm-8">
                 <form method="post" action="" class="form card shadow ">

@@ -8,27 +8,118 @@
         <div class="map-container my-2 justify-content-center border rounded">
             <img src="{% static 'backgrounds/map.png' %}" alt="Travel Map" class="map-image">
         </div>
-        <div class="travel-info p-2 mt-2">
+        {% if current %}
+        <div class="travel-info p-2 mt-2 text-center">
+            <p>You are currently traveling to
+                <span class="highlight">{{ current.destination.location_name }}</span>!
+            </p>
+            <p>⏳ Time remaining:
+                {% if remaining.total_seconds > 0 %}
+                    <span id="countdown"
+                        data-end="{{ end_time|date:'U' }}"
+                        data-start="{{ current.created_at|date:'U' }}"
+                        data-duration="{{ current.destination.time }}">
+                        {{ end_time|timeuntil }}
+                    </span>
+                </p>
+                <div class="progress my-2" style="height: 20px;">
+                    <div id="progressBar"
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        style="width: {{ progress|floatformat:0 }}%;"
+                        aria-valuenow="{{ progress|floatformat:0 }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100">
+                        {{ progress|floatformat:0 }}%
+                    </div>
+                </div>
+                {% else %}
+                    <span class="highlight">Completed!</span>
+                {% endif %}
+            </p>
+            {% if remaining.total_seconds <= 0 %}
+                <a href="{% url 'complete_adventure' current.id %}" class="btn-travel mt-2">✔ Claim Rewards</a>
+            {% endif %}
+        </div>
+        <a href="{% url 'complete_adventure' current.id %}" class="btn-travel mt-2 mb-2 small">✔ Finish (Dev)</a>
+        {% else %}
+        <div class="mb-3 text-center w-100">
+            <select id="adventureDropdown" class="form-select">
+                <option value="">Locations!</option>
+                {% for loc in locations %}
+                    <option value="{{ loc.id }}"
+                    data-exp="{{ loc.exp_reward }}"
+                    data-credits="{{ loc.credit_reward }}"
+                    data-time="{{ loc.time }}"
+                    data-name="{{ loc.location_name }}">
+                    {{ loc.location_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div id="adventurePreview" class="travel-info p-2 mt-2 d-none">
             <p class="mb-1">The location you selected will grant
-                <span class="highlight">10 EXP</span> and
-                <span class="highlight">2652 credits</span>,
+                <span class="highlight" id="previewExp"></span> EXP and
+                <span class="highlight" id="previewCredits"></span> credits,
                 travel will take
-                <span class="highlight">7 hours</span>.
+                <span class="highlight" id="previewTime"></span> hours.
             </p>
-        </div>
-        <div class="drop-info p-2 mt-2">
-            <p class="mb-1 small">
-                There's a <span class="chance">5,28%</span> chance to obtain the following item types:
+            <p class="text-center mt-3 small" style="color:black;">
+                Will you travel to <b id="previewName"></b>?
             </p>
-            <ul class="drop-list small">
-                <li>🧴 Cosmetics</li>
-                <li>🍖 Food</li>
-            </ul>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="destination" id="destinationInput">
+                <button type="submit" class="btn-travel mt-2">LET'S GO!</button>
+            </form>
         </div>
-        <p class="text-center mt-3 small" style="color:black;">Will you travel to the <b>Nunsk Village</b>?</p>
-        <div class="mt-2 text-center">
-            <button class="btn-travel">LET'S GO!</button>
-        </div>
+        {% endif %}
     </div>
 </body>
+<script>
+    const dropdown = document.getElementById("adventureDropdown");
+    const preview = document.getElementById("adventurePreview");
+    const exp = document.getElementById("previewExp");
+    const credits = document.getElementById("previewCredits");
+    const time = document.getElementById("previewTime");
+    const name = document.getElementById("previewName");
+    const hiddenInput = document.getElementById("destinationInput");
+
+    dropdown.addEventListener("change", function() {
+        const option = dropdown.options[dropdown.selectedIndex];
+        if (option.value) {
+            exp.textContent = option.dataset.exp;
+            credits.textContent = option.dataset.credits;
+            time.textContent = option.dataset.time;
+            name.textContent = option.dataset.name;
+            hiddenInput.value = option.value;
+            preview.classList.remove("d-none");
+        } else {
+            preview.classList.add("d-none");
+        }
+    });
+
+    function updateCountdown() {
+        const countdown = document.getElementById("countdown");
+        if (!countdown) return;
+
+        const endTime = parseInt(countdown.dataset.end) * 1000;
+        const now = new Date().getTime();
+        const diff = endTime - now;
+
+        if (diff <= 0) {
+            countdown.textContent = "✔ Completed!";
+            return;
+        }
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        countdown.textContent = `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+</script>
 {% endblock %}

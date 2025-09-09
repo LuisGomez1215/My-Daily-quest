@@ -252,6 +252,12 @@ a {
     padding: 6px;
 }
 
+.inventory-image {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: cover;
+}
+
 .task-screen {
     max-width: 420px;
     margin: 0 auto;
@@ -289,6 +295,22 @@ a {
     height: 2rem;
     margin-right: 0.8rem;
     font-size: 1.2rem;
+}
+
+.task-list {
+    scrollbar-width: thin;
+    scrollbar-color: #444 #222;
+}
+
+.task-list::-webkit-scrollbar {
+    width: 6px;
+}
+.task-list::-webkit-scrollbar-track {
+    background: #222;
+}
+.task-list::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 3px;
 }
 
 .btn-add-goal {

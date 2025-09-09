@@ -2,11 +2,28 @@
 {% block content %}
 {% load static %}
 
-<body class="gamertext" style="background-image: url('{% static "backgrounds/background.png" %}')">
-    <div class="container">
-        <div class="d-flex justify-content-center align-items-center petscreen">new task
-            <img class="h100 w100 img-fluid" src="https://cdn.discordapp.com/attachments/668596153822216220/1409431656640811018/WEB_APP.png?ex=68ad5b04&is=68ac0984&hm=3365d7f4ca21d64e01bb2863766927a32989c959b5c81fab3724f78a83710652" alt="...">
+<body class="gamertext d-flex justify-content-center align-items-center vh-100"
+      style="background-image: url('{% static "backgrounds/background.png" %}')">
+    <div class="container task-screen text-light py-3 col-10 col-md-6 col-lg-4 d-flex flex-column">
+        <hr class="divider">
+        <div class="d-flex justify-content-between align-items-center mb-3 px-2 ">
+            <span class="small" style="color:black;">✏️ Create your own custom goal</span>
+        </div>
+        <div class="task-list">
+            <form method="post" enctype="multipart/form-data" class="d-flex flex-column">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_name" class="form-label" style="color:black;">Task Name</label>
+                    {{ form.name }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_icon" class="form-label" style="color:black;">Task Icon</label>
+                    {{ form.icon }}
+                </div>
+                <button type="submit" class="btn-add-goal mt-3">✔ Save Goal</button>
+            </form>
         </div>
     </div>
 </body>
+
 {% endblock %}
