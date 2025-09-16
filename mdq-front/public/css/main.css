@@ -1,0 +1,67 @@
+#nav .navbar-brand {
+    margin-right: 0;
+    margin-top: 0.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0
+}
+#nav > div > div:first-child,
+#nav > div > div:last-child {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+i.bi {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    vertical-align: top;
+    position: relative;
+    top: -2px
+}
+i.bi.bi-shadow > svg {
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, .7))
+}
+i.bi-20,
+i.bi-20 > svg {
+    width: 20px;
+    height: 20px
+}
+i.bi-30,
+i.bi-30 > svg {
+    width: 30px;
+    height: 30px
+}
+i.bi-40,
+i.bi-40 > svg {
+    width: 40px;
+    height: 40px
+}
+.btn svg.bi {
+    position: relative;
+    top: -2px;
+    padding-right: 2px
+}
+
+input[type=number].no-arrows::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number].no-arrows {
+    -moz-appearance: textfield;
+}
+
+@media (prefers-color-scheme: dark) {
+    #nav .navbar-brand svg {
+        fill: #fff;
+    }
+}
+.navbar {
+    min-height: 50px !important;
+    height: 50px !important;
+    max-height: 50px !important;
+}
+.petscreen {
+    padding-top: 20%;
+}

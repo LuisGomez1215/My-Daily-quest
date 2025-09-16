@@ -1,0 +1,8 @@
+{
+  "name": "My Daily Quest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite",
+  "id": "88cf5667"
+}
