@@ -40,14 +40,14 @@ class MdqUserRegisterSerializer(serializers.ModelSerializer):
     def validate_username(self, value):
         try:
             MdqUser.objects.get(username=value)
-            raise serializers.ValidationError(status=status.HTTP_400_BAD_REQUEST)
+            raise serializers.ValidationError({"detail": "existing_user"})
         except MdqUser.DoesNotExist:
             return value
 
     def validate_email(self, value):
         try:
             MdqUser.objects.get(email=value)
-            raise serializers.ValidationError(status=status.HTTP_400_BAD_REQUEST)
+            raise serializers.ValidationError({"detail": "existing_email"})
         except MdqUser.DoesNotExist:
             return value
 
@@ -56,7 +56,7 @@ class MdqUserRegisterSerializer(serializers.ModelSerializer):
         pswd2 = attrs["password2"]
 
         if password and pswd2 and password != pswd2:
-            raise serializers.ValidationError(status=status.HTTP_400_BAD_REQUEST)
+            raise serializers.ValidationError({"detail": "invalid_password"})
         return attrs
 
     def create(self, validated_data):
@@ -146,7 +146,7 @@ class PetSelectionSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         user = self.context["request"].user
         if Pet.objects.filter(user=user).exists():
-            raise serializers.ValidationError(status=status.HTTP_403_FORBIDDEN)
+            raise serializers.ValidationError({"detail": 'existing_pet'})
         return attrs
 
     def create(self, validated_data):
