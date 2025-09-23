@@ -196,18 +196,6 @@ def task_list(request):
         "tasks": tasklist.tasks.all(),
     })
 
-def stats(request):
-    pet = None
-
-    try:
-        pet = Pet.objects.get(user=request.user)
-    except Pet.DoesNotExist:
-        response = render(request, '404.html')
-        response.status_code = 404
-        return response
-    return render(request, 'pages/stats.html', {'pet': pet})
-
-
 @login_required
 def complete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id, task_lists__user=request.user)
@@ -225,3 +213,14 @@ def complete_task(request, task_id):
         task.delete()
 
     return redirect("tasklist")
+
+def stats(request):
+    pet = None
+
+    try:
+        pet = Pet.objects.get(user=request.user)
+    except Pet.DoesNotExist:
+        response = render(request, '404.html')
+        response.status_code = 404
+        return response
+    return render(request, 'pages/stats.html', {'pet': pet})
