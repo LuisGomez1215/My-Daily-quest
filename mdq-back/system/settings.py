@@ -14,7 +14,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == '1'
 ALLOWED_HOSTS = [y for x in os.getenv('ALLOWED_HOSTS').split(',') if (y := x.strip())]
 
-# Application definition
+CORS_ALLOWED_ORIGINS = [y for x in os.getenv('CORS_ALLOWED_ORIGINS').split(',') if (y := x.strip())]
+CSRF_TRUSTED_ORIGINS = [y for x in os.getenv('CSRF_TRUSTED_ORIGINS').split(',') if (y := x.strip())]
 
 ROOT_URLCONF = 'system.urls'
 WSGI_APPLICATION = 'system.wsgi.application'
@@ -130,4 +131,11 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=50),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": False,
 }
