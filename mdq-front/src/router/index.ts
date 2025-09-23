@@ -1,39 +1,44 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router';
-import { RouteRecordRaw } from 'vue-router';
-import TabsPage from '../views/TabsPage.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
+// Lazy load de vistas
+const Home = () => import('../views/home/Home.vue');
+const PetScreen = () => import('../views/pet/PetScreen.vue');
+const PetSelect = () => import('../views/pet/PetSelect.vue');
+const Login = () => import('../views/Auth/Login.vue');
+
+// Definición de rutas
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    redirect: '/tabs/tab1'
+    path: '/home',
+    name: 'Home',
+    component: Home
   },
   {
-    path: '/tabs/',
-    component: TabsPage,
-    children: [
-      {
-        path: '',
-        redirect: '/tabs/tab1'
-      },
-      {
-        path: 'tab1',
-        component: () => import('@/views/Tab1Page.vue')
-      },
-      {
-        path: 'tab2',
-        component: () => import('@/views/Tab2Page.vue')
-      },
-      {
-        path: 'tab3',
-        component: () => import('@/views/Tab3Page.vue')
-      }
-    ]
+    path: '/pet',
+    name: 'PetScreen',
+    component: PetScreen
+  },
+  {
+    path: '/pet/select',
+    name: 'PetSelect',
+    component: PetSelect
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  // Ruta comodín para redirigir a home si no existe
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
   }
-]
+];
 
+// Crear router
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes
-})
+});
 
-export default router
+export default router;

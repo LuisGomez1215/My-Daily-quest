@@ -1,37 +1,39 @@
+<!-- App.vue - Versión con Header Global -->
 <script setup>
-import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonRouterOutlet, IonFooter } from '@ionic/vue'
+import { IonApp, IonHeader, IonToolbar, IonTitle, IonContent, IonRouterOutlet } from '@ionic/vue';
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <ion-router-outlet />
   <IonApp>
-    <!-- Top Navbar -->
-    <IonHeader>
-      <IonToolbar style="--background: #f08897;">
-        <IonTitle>home</IonTitle>
-      </IonToolbar>
-    </IonHeader>
 
-    <!-- Page Content -->
-    <IonContent fullscreen>
-      <!-- Messages (placeholder) -->
-      <div id="messages" class="ion-padding">
-        <!-- Replace with a Vue messages component later -->
-      </div>
-
-      <!-- Page Outlet (like {% block content %}) -->
-      <IonRouterOutlet />
+    <IonContent>
+      <!-- IMPORTANTE: Usar RouterView en lugar de IonRouterOutlet cuando tienes header global -->
+      <RouterView />
     </IonContent>
-
-    <!-- Bottom Navbar -->
-    <IonFooter>
-      <IonToolbar style="--background: #f08897;">
-        <IonTitle>Footer Nav</IonTitle>
-      </IonToolbar>
-    </IonFooter>
   </IonApp>
 </template>
 
 <style>
-/* Optional: bring over styles from /public/css/main.css if needed */
+/* Mismo CSS que la opción anterior */
+@import '@ionic/vue/css/core.css';
+@import '@ionic/vue/css/normalize.css';
+@import '@ionic/vue/css/structure.css';
+@import '@ionic/vue/css/typography.css';
+@import '@ionic/vue/css/padding.css';
+@import '@ionic/vue/css/float-elements.css';
+@import '@ionic/vue/css/text-alignment.css';
+@import '@ionic/vue/css/flex-utils.css';
+@import '@ionic/vue/css/display.css';
+
+@font-face {
+  font-family: "Gamergirl";
+  src: url('./assets/fonts/Gamergirl.ttf');
+}
+
+.gamertext {
+  font-family: "Gamergirl";
+}
+
+/* Resto de estilos... */
 </style>
